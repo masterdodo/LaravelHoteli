@@ -16,6 +16,7 @@ class HotelsController extends Controller
     {
         //
         $hotels = Hotel::all();
+        $url = action('HotelsController@create');
 
         return view('hotels.index')->with('AllHotels', $hotels);
     }
@@ -38,7 +39,32 @@ class HotelsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|max:200',
+            'address' => 'required|max:200',
+            'all_places' => 'required|max:200',
+            'start_date' => 'required|max:200',
+            'end_date' => 'required|max:200',
+            'image' => 'image|required|max:1999',
+            'description' => 'required|max:200',
+            'user_id' => 'required'
+        ]);
+
+        $photoName = time().'.'.$request->image->getClientOriginalExtension();
+        $request->image->move(public_path('images'), $photoName);
+
+        $hotel = new Hotel;
+        $hotel->name = $request->get('name');
+        $hotel->address = $request->get('address');
+        $hotel->filled_places = 0;
+        $hotel->all_places = $request->get('all_places');
+        $hotel->start_date = $request->get('start_date');
+        $hotel->end_date = $request->get('end_date');
+        $hotel->image = $photoName;
+        $hotel->description = $request->get('description');
+        $hotel->user_id = $request->get('user_id');
+        $hotel->save();
     }
 
     /**
@@ -60,7 +86,8 @@ class HotelsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $hotel = Hotel::find($id);
+        return view('hotels.edit', compact('hotel', 'id'));
     }
 
     /**
@@ -72,7 +99,31 @@ class HotelsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:200',
+            'address' => 'required|max:200',
+            'all_places' => 'required|max:200',
+            'start_date' => 'required|max:200',
+            'end_date' => 'required|max:200',
+            'description' => 'required|max:200',
+        ]);
+        
+        $hotel = Hotel::find($id);
+        if(isset($request->image))
+        {
+            $photoName = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images'), $photoName);
+            $hotel->image = $photoName;
+        }
+        $hotel->name = $request->get('name');
+        $hotel->address = $request->get('address');
+        $hotel->all_places = $request->get('all_places');
+        $hotel->start_date = $request->get('start_date');
+        $hotel->end_date = $request->get('end_date');
+        $hotel->description = $request->get('description');
+        $hotel->save();
+
+        return redirect('/hotels/')->with('success', 'Hotel was added successfully.');
     }
 
     /**

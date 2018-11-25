@@ -2,14 +2,12 @@
 
 @section('content')
 
-<h1>Contact Us</h1>
+<h1>New Hotel</h1>
 <br />
 
     <div class="create-hotel-div">
-        {!! Form::open(['method'=>'POST', 'action'=>'HotelsController@store']) !!}
-        <!-- @ csfr omogoča, da ko pošlemo prazno formo, ostanemo na insti strani in ne napiše
-        error page not found -->
-
+        {!! Form::open(['method'=>'POST', 'action'=>'HotelsController@store', 'enctype'=>'multipart/form-data']) !!}
+        {!! Form::hidden('user_id', $id = Auth::id()) !!}
         <div class="form-group">
             {!! Form::label('name', 'Hotel name:') !!}
             {!! Form::text('name', null, ['class'=>'form-control']) !!}
@@ -21,28 +19,23 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('filled_places', 'Filled places:') !!}
-            {!! Form::numbers('filled_places', null, ['class'=>'form-control']) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('all_places', 'All places:') !!}
-            {!! Form::numbers('all_places', null, ['class'=>'form-control']) !!}
+            {!! Form::label('all_places', 'Available places:') !!}
+            {!! Form::text('all_places', null, ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
             {!! Form::label('start_date', 'Start date:') !!}
-            {!! Form::text('start_date', null, ['class'=>'form-control']) !!}
+            {!! Form::date('start_date', null, ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
             {!! Form::label('end_date', 'End date:') !!}
-            {!! Form::text('end_date', null, ['class'=>'form-control']) !!}
+            {!! Form::date('end_date', null, ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
             {!! Form::label('image', 'Image:') !!}
-            {!! Form::text('image', null, ['class'=>'form-control']) !!}
+            {!! Form::file('image', ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
@@ -50,8 +43,8 @@
             {!! Form::textarea('description', null, ['class'=>'form-control']) !!}
         </div>
 
-        <div class="form-group submit-contact-form">
-            {!! Form::submit('Send email', ['class'=>'btn']) !!}
+        <div class="form-group submit-new-hotel">
+            {!! Form::submit('Create hotel', ['class'=>'btn']) !!}
         </div>
 
         {!! Form::close() !!}

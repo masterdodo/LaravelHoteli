@@ -1,0 +1,31 @@
+.create-hotel-div
+{
+    width: 35%;
+    min-width: 200px;
+}
+
+.hotel-index-div
+{
+    width: fit-content;
+    margin-left: 15px;
+    margin-top: 15px;
+    padding: 10px;
+    border: 2px solid #eaeaea;
+    border-radius: 6px;
+    background-color: #e5e5e5;
+    transition: ease-in 0.2s;
+}
+
+.hotel-index-div:hover
+{
+    margin-left: 8px;
+}
+
+.standard-btn
+{
+    padding: 10px;
+    margin-left: 5px;
+    text-decoration: none;
+    color: gray;
+    border: 1px #ccc solid;
+}
