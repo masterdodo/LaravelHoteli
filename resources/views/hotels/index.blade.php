@@ -3,7 +3,7 @@
 
 <a href="{{action('HotelsController@create')}}" class="standard-btn">New Hotel</a>
 
-<table>
+
 @foreach($AllHotels as $Hotel)
     <div class="hotel-index-div">
         <p>Hotel name: {{$Hotel->name}}</p>
@@ -13,8 +13,12 @@
         <p>Last day of accommodation: {{$end_date = date('d. m. Y', strtotime($Hotel->end_date))}}</p>
         <p>Hotel description: {{$Hotel->description}}</p>
         <a href="{{ action('HotelsController@edit', ['id' => $Hotel->id]) }}">Edit Hotel</a>
+
+        {!! Form::open(['action' => ['HotelsController@destroy', $Hotel->id] ]) !!}
+            {{ Form::hidden('_method', 'delete') }}
+            {{ Form::submit('Delete Hotel',['class' => 'button-normal'])}}
+        {!! Form::close() !!}
     </div>
 @endforeach
-</table>
 
 @endsection

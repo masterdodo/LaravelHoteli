@@ -60,6 +60,7 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
+                                <br /><a href="{{ route('redirect') }}">Login in with Google</a>
                             </div>
                         </div>
                     </form>

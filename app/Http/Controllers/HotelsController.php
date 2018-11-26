@@ -40,7 +40,7 @@ class HotelsController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        /*$request->validate([
             'name' => 'required|max:200',
             'address' => 'required|max:200',
             'all_places' => 'required|max:200',
@@ -49,7 +49,7 @@ class HotelsController extends Controller
             'image' => 'image|required|max:1999',
             'description' => 'required|max:200',
             'user_id' => 'required'
-        ]);
+        ]);*/
 
         $photoName = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('images'), $photoName);
@@ -134,6 +134,8 @@ class HotelsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $hotel = Hotel::find($id);
+        $hotel->delete();
+        return redirect('/hotels/')->with('success', 'Hotel was successfully deleted.');
     }
 }

@@ -17,5 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/hotels', 'HotelsController@index')->name('hotels');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('hotels', 'HotelsController');
+
+Route::get('/redirect', 'Auth\LoginController@redirectToProvider')->name('redirect');
+Route::get('/callback', 'Auth\LoginController@handleProviderCallback')->name('callback');
+
