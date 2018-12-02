@@ -4,6 +4,7 @@ namespace Hotels\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Hotels\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -20,37 +21,34 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        if(Auth::user()->email == request('email'))
+        $user = User::find($id);
+        if($request->password != '')
         {
-            $this->validate(request(), [
-                    'name' => 'required',
-                    //'email' => 'required|email|unique:users',
-                    'password' => 'required|min:6|confirmed'
-                ]);
-        
-            $user->name = request('name');
-            //$user->email = request('email');
-            $user->password = bcrypt(request('password'));
-        
+            $request->validate([
+                'password' => 'required|min:6|confirmed'
+            ]);
+
+            $user->password = bcrypt($request->password);
+
             $user->save();
-        
-            return back();
+
+            return back()->with('success', 'Password changed successfully!');
+        }
+        else if($request->name != '')
+        {
+            $request->validate([
+                    'name' => 'required|min:5'
+                ]);
+
+            $user->name = $request->name;
+
+            $user->save();
+
+            return back()->with('success', 'Username changed successfully!');
         }
         else
         {
-            $this->validate(request(), [
-                    'name' => 'required',
-                    'email' => 'required|email|unique:users',
-                    'password' => 'required|min:6|confirmed'
-                ]);
-        
-            $user->name = request('name');
-            $user->email = request('email');
-            $user->password = bcrypt(request('password'));
-
-            $user->save();
-
-            return back();  
+            return back();
         }
     }
 }

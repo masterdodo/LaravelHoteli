@@ -72,6 +72,8 @@ class HotelsController extends Controller
         $hotel->description = $request->get('description');
         $hotel->user_id = $request->get('user_id');
         $hotel->save();
+
+        return redirect('/hotels')->with('success', 'Hotel has been added!');
     }
 
     /**
