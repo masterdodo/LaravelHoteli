@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Hotels\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Hotels\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
-use App\User;
+use Hotels\User;
 
 class LoginController extends Controller
 {
@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/hotels';
 
     /**
      * Create a new controller instance.
@@ -87,7 +87,7 @@ class LoginController extends Controller
 
             auth()->login($newUser, true);
         }
-        return redirect()->to('/hotels');
+        return redirect()->route('/hotels');
     }
 
 }

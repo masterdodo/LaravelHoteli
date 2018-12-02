@@ -18,6 +18,10 @@
                 <input type="text" class="form-control" name="address" value="{{$hotel->address}}">
             </div>
             <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" class="form-control" name="price" value="{{$hotel->price}}">
+                </div>
+            <div class="form-group">
                 <label for="all_places">Available places:</label>
                 <input type="number" class="form-control" name="all_places" value="{{$hotel->all_places}}">
             </div>

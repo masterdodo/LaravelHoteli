@@ -48,6 +48,12 @@
                 font-size: 84px;
             }
 
+            #title-name
+            {
+                text-decoration: none;
+                color: #636b6f;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -81,16 +87,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a id="title-name" href="{{ route('home') }}">Hotels</a>
                 </div>
             </div>
         </div>

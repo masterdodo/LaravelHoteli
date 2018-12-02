@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Hotels\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Hotel;
+use Hotels\Hotel;
+use Auth;
 
 class HotelsController extends Controller
 {
@@ -14,7 +15,6 @@ class HotelsController extends Controller
      */
     public function index()
     {
-        //
         $hotels = Hotel::all();
         $url = action('HotelsController@create');
 
@@ -28,7 +28,14 @@ class HotelsController extends Controller
      */
     public function create()
     {
-        return view('hotels.create');
+        if(Auth::guest())
+        {
+            return redirect()->action('HotelsController@index');
+        }
+        else
+        {
+            return view('hotels.create');
+        }
     }
 
     /**
@@ -57,6 +64,7 @@ class HotelsController extends Controller
         $hotel = new Hotel;
         $hotel->name = $request->get('name');
         $hotel->address = $request->get('address');
+        $hotel->price = $request->get('price');
         $hotel->filled_places = 0;
         $hotel->all_places = $request->get('all_places');
         $hotel->start_date = $request->get('start_date');
@@ -102,6 +110,7 @@ class HotelsController extends Controller
         $request->validate([
             'name' => 'required|max:200',
             'address' => 'required|max:200',
+            'price' => 'required|max:10',
             'all_places' => 'required|max:200',
             'start_date' => 'required|max:200',
             'end_date' => 'required|max:200',
@@ -117,13 +126,14 @@ class HotelsController extends Controller
         }
         $hotel->name = $request->get('name');
         $hotel->address = $request->get('address');
+        $hotel->price = $request->get('price');
         $hotel->all_places = $request->get('all_places');
         $hotel->start_date = $request->get('start_date');
         $hotel->end_date = $request->get('end_date');
         $hotel->description = $request->get('description');
         $hotel->save();
 
-        return redirect('/hotels/')->with('success', 'Hotel was added successfully.');
+        return redirect('/hotels/')->with('success', 'Hotel was eddited successfully.');
     }
 
     /**
@@ -137,5 +147,12 @@ class HotelsController extends Controller
         $hotel = Hotel::find($id);
         $hotel->delete();
         return redirect('/hotels/')->with('success', 'Hotel was successfully deleted.');
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'required|max:200',
+        ]);
     }
 }

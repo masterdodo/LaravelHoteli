@@ -19,6 +19,11 @@
         </div>
 
         <div class="form-group">
+                {!! Form::label('price', 'Price:') !!}
+                {!! Form::text('price', null, ['class'=>'form-control']) !!}
+            </div>
+
+        <div class="form-group">
             {!! Form::label('all_places', 'Available places:') !!}
             {!! Form::text('all_places', null, ['class'=>'form-control']) !!}
         </div>
