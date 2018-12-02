@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/hotels', 'HotelsController@index')->name('hotels');
+//Route::get('/hotels', 'HotelsController@index')->name('hotels');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('hotels', 'HotelsController');
@@ -28,4 +28,4 @@ Route::get('/callback', 'Auth\LoginController@handleProviderCallback')->name('ca
 Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edit']);
 Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserController@update']);
 
-Route::get('/hotels',['uses' => 'HotelsController@search','as' => 'search']);
+Route::get('/search',['uses' => 'HotelsController@search','as' => 'search']);

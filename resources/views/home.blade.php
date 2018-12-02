@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in! <a href="{{ action('HotelsController@index') }}">Go to Hotels!</a>
+                    You are logged in!
                 </div>
             </div>
         </div>

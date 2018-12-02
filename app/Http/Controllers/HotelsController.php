@@ -16,7 +16,6 @@ class HotelsController extends Controller
     public function index()
     {
         $hotels = Hotel::all();
-        $url = action('HotelsController@create');
 
         return view('hotels.index')->with('AllHotels', $hotels);
     }
