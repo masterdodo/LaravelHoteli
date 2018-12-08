@@ -2,6 +2,22 @@
 
 @section('content')
 
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <h1>New Hotel</h1>
 <br />
 
@@ -19,7 +35,7 @@
         </div>
 
         <div class="form-group">
-                {!! Form::label('price', 'Price:') !!}
+                {!! Form::label('price', 'Price:(in euros)') !!}
                 {!! Form::text('price', null, ['class'=>'form-control']) !!}
             </div>
 

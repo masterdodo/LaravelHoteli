@@ -87,7 +87,7 @@ class LoginController extends Controller
 
             auth()->login($newUser, true);
         }
-        return redirect()->route('/hotels');
+        return redirect()->route('home');
     }
 
 }

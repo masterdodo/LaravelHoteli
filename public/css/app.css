@@ -130,6 +130,10 @@
   cursor: pointer;
 }
 
+.price-hotel {
+  color: #1ab81a;
+}
+
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

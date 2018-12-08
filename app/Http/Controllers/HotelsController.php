@@ -4,6 +4,7 @@ namespace Hotels\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Hotels\Hotel;
+use Hotels\Login;
 use Auth;
 
 class HotelsController extends Controller
@@ -15,9 +16,19 @@ class HotelsController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::all();
+        if(Auth::user())
+        {
+            $user_id = Auth::user()->id;
+            $Logins = \DB::table('logins')->where('user_id', $user_id)->get();
+        }
+        else
+        {
+            $Logins = false;
+        }
+        $today_date = date('Y-m-d H:i:s');
+        $AllHotels = Hotel::where('start_date', '>', $today_date)->get();
 
-        return view('hotels.index')->with('AllHotels', $hotels);
+        return view('hotels.index', compact('AllHotels', 'Logins'));
     }
 
     /**
@@ -46,16 +57,17 @@ class HotelsController extends Controller
     public function store(Request $request)
     {
 
-        /*$request->validate([
+        $request->validate([
             'name' => 'required|max:200',
             'address' => 'required|max:200',
-            'all_places' => 'required|max:200',
-            'start_date' => 'required|max:200',
-            'end_date' => 'required|max:200',
-            'image' => 'image|required|max:1999',
+            'price' => 'required|numeric',
+            'all_places' => 'required|numeric',
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d',
+            'image' => 'image|required',
             'description' => 'required|max:200',
-            'user_id' => 'required'
-        ]);*/
+            'user_id' => 'required|numeric|min:0'
+        ]);
 
         $photoName = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('images'), $photoName);
@@ -95,8 +107,15 @@ class HotelsController extends Controller
      */
     public function edit($id)
     {
-        $hotel = Hotel::find($id);
-        return view('hotels.edit', compact('hotel', 'id'));
+        if(Auth::guest())
+        {
+            return redirect()->action('HotelsController@index');
+        }
+        else
+        {
+            $hotel = Hotel::find($id);
+            return view('hotels.edit', compact('hotel', 'id'));
+        }
     }
 
     /**
@@ -115,7 +134,7 @@ class HotelsController extends Controller
             'all_places' => 'required|max:200',
             'start_date' => 'required|max:200',
             'end_date' => 'required|max:200',
-            'description' => 'required|max:200',
+            'description' => 'required|max:200'
         ]);
         
         $hotel = Hotel::find($id);
@@ -134,7 +153,7 @@ class HotelsController extends Controller
         $hotel->description = $request->get('description');
         $hotel->save();
 
-        return redirect('/hotels/')->with('success', 'Hotel was eddited successfully.');
+        return redirect('/hotels/')->with('success', 'Hotel was edited successfully.');
     }
 
     /**
@@ -147,7 +166,7 @@ class HotelsController extends Controller
     {
         $hotel = Hotel::find($id);
         $hotel->delete();
-        return redirect('/hotels/')->with('success', 'Hotel was successfully deleted.');
+        return redirect('/hotels/')->with('success', 'Hotel was successfully deleted!');
     }
 
     public function search(Request $request)
@@ -155,5 +174,35 @@ class HotelsController extends Controller
         $request->validate([
             'search' => 'required|max:200',
         ]);
+
+        $AllHotels = Hotel::where('name', 'like', '%' . $request->get('search') . '%');
+    }
+
+    public function hotellogin()
+    {
+        $log = new Login;
+        $log->user_id = $_GET['user_id'];
+        $log->hotel_id = $_GET['hotel_id'];
+        $log->save();
+
+        $hotel = Hotel::find($_GET['hotel_id']);
+        $new_places = $hotel->filled_places + 1;
+        $hotel->filled_places = $new_places;
+        $hotel->save();
+
+        return redirect('/hotels/')->with('success', 'You successfully logged to the hotel!');
+    }
+
+    public function hotellogout()
+    {
+        $login = Login::where('hotel_id', $_GET['hotel_id']);
+        $login->delete();
+
+        $hotel = Hotel::find($_GET['hotel_id']);
+        $new_places = $hotel->filled_places - 1;
+        $hotel->filled_places = $new_places;
+        $hotel->save();
+        
+        return redirect('/hotels/')->with('success', 'You successfully logged out of the hotel!');
     }
 }
