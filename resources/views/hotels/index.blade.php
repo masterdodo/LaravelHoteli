@@ -6,7 +6,14 @@
     </div>
 @endif
 @if(Auth::user())
-<a href="{{ action('HotelsController@create') }}" class="standard-btn">New Hotel</a><br /><br />
+@if(Auth::user()->id == 3 || Auth::user()->editor == 1)
+<a href="{{ action('HotelsController@create') }}" class="standard-btn">New Hotel</a>
+@endif
+@if(Auth::user()->id == 3)
+<a href="{{ action('UserController@index') }}" class="standard-btn">Users</a><br /><br />
+@elseif(Auth::user()->editor == 1)
+<br /><br />
+@endif
 @endif
 <div id="index-banner">
     <p id="banner-title">Find the best hotel for you.</p>
@@ -18,10 +25,17 @@
 @foreach($AllHotels as $Hotel)
     <div class="hotel-index-div">
         <div class="hotel-index-div-left">
-            <img src="{{url('/images'). "/" . $Hotel->image}}" alt="hotel_image" width="380">
+            <img src="{{url('/images'). "/" . $Hotel->image}}" alt="hotel_image" width="350">
             <p><b>{{$Hotel->name}}</b> - <span class="price-hotel"><b>{{$Hotel->price}} €</b></span></p>
         </div>
         <div class="hotel-index-div-right">
+            <p><b>Published by:</b>
+            @foreach($AllUsers as $User)
+                @if($User->id == $Hotel->user_id)
+                    {{ $User->name . ',' }}
+                @endif
+            @endforeach
+            {{ $Hotel->created_at->diffForHumans() }}</p>
             <p><b>Availability:</b> {{$Hotel->filled_places}}/{{$Hotel->all_places}}</p>
             <p><b>Hotel address:</b> {{$Hotel->address}}</p>
             <p><b>First day of accommodation:</b> {{$start_date = date('d. m. Y', strtotime($Hotel->start_date))}}</p>
@@ -30,6 +44,7 @@
             @if(Auth::user())
             <table>
             <tr>
+                @if(Auth::user()->id != 3)
                 @php $_SESSION['logout_exists'] = 0 @endphp
                 @if(isset($Logins))
                 @foreach($Logins as $login)
@@ -55,7 +70,8 @@
                 </td>
                 @endif
                 @php $_SESSION['logout_exists'] = 0 @endphp
-                @if(Auth::user()->id == $Hotel->user_id)
+                @endif
+                @if(Auth::user()->id == $Hotel->user_id || Auth::user()->id == 3)
                 <td>
                     <form action="{{ action('HotelsController@edit', ['id' => $Hotel->id]) }}">
                         <button class="link-to-button yellow-button" type="submit">Edit Hotel</button>

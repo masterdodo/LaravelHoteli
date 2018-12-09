@@ -5,7 +5,9 @@ namespace Hotels\Http\Controllers;
 use Illuminate\Http\Request;
 use Hotels\Hotel;
 use Hotels\Login;
+use Hotels\User;
 use Auth;
+
 
 class HotelsController extends Controller
 {
@@ -27,8 +29,9 @@ class HotelsController extends Controller
         }
         $today_date = date('Y-m-d H:i:s');
         $AllHotels = Hotel::where('start_date', '>', $today_date)->get();
+        $AllUsers = User::all();
 
-        return view('hotels.index', compact('AllHotels', 'Logins'));
+        return view('hotels.index', compact('AllHotels', 'Logins', 'AllUsers'));
     }
 
     /**

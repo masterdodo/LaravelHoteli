@@ -3,6 +3,7 @@
 namespace Hotels\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hotels\Hotel;
 use Hotels\User;
 use Auth;
 
@@ -11,6 +12,52 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        if(Auth::user()->id == 3)
+        {
+            $AllUsers = User::all();
+            return view('users.index', compact('AllUsers'));
+        }
+    }
+
+    public function create()
+    {
+        if(Auth::user()->id == 3)
+        {
+            return view('users.create');
+        }
+        else
+        {
+            return redirect('/hotels/');
+        }
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:5|max:200',
+            'email' => 'required|max:200',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = new User;
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->password);
+        if($request->has('editor'))
+        {
+            $user->editor = 1;
+        }
+        else
+        {
+            $user->editor = 0;
+        }
+        $user->save();
+
+        return redirect('/users')->with('success', 'User has been added!');
     }
 
     public function edit(User $user)
@@ -50,5 +97,15 @@ class UserController extends Controller
         {
             return back();
         }
+    }
+
+    public function destroy($id)
+    {
+        $Hotels = Hotel::where('user_id', $id);
+        $Hotels->delete();
+        $User = User::find($id);
+        $User->delete();
+
+        return redirect('/users/')->with('success', 'User was successfully deleted!');
     }
 }
