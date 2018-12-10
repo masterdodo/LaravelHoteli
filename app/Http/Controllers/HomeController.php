@@ -36,6 +36,7 @@ class HomeController extends Controller
         }
         $today_date = date('Y-m-d H:i:s');
         $AllHotels = Hotel::where('start_date', '>', $today_date)->get();
+        $AllUsers = User::all();
 
         return view('hotels.index', compact('AllHotels', 'Logins'));
     }
