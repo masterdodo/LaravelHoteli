@@ -49,4 +49,4 @@ It shows us a form with all the attributes, we write them/edit them and then it 
 
 ### App Screenshot:
 
-![APP-IMAGE](https://raw.aristovnik.com/images/laravelhotel.png)
+![APP-IMAGE](https://raw.aristovnik.com/images/laravelhoteli.png)
