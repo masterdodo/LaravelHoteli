@@ -1,7 +1,7 @@
 # Hotel Manager
 This project allows you to insert hotels to the database. It allows you to edit them or delte them if you are the publisher of that hotel. 
 <br><br>
-### Kazalo:
+### Contents:
 [Login and Register](#login-and-register)<br>
 [Administrator](#administrator)<br>
 [Users](#users)<br>
