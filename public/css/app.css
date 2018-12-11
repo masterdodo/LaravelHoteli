@@ -134,6 +134,20 @@
   color: #1ab81a;
 }
 
+#capacity-field {
+  width: 60px;
+}
+
+.hotel-image {
+  width: 350px;
+}
+
+@media only screen and (max-width: 1450px) {
+  .hotel-image {
+    width: 100%;
+  }
+}
+
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

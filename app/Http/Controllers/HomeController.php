@@ -4,6 +4,7 @@ namespace Hotels\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Hotels\Hotel;
+use Hotels\User;
 use Auth;
 
 class HomeController extends Controller

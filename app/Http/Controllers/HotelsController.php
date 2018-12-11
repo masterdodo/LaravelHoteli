@@ -186,26 +186,36 @@ class HotelsController extends Controller
         $log = new Login;
         $log->user_id = $_GET['user_id'];
         $log->hotel_id = $_GET['hotel_id'];
+        $log->capacity = $_GET['capacity'];
         $log->save();
 
         $hotel = Hotel::find($_GET['hotel_id']);
-        $new_places = $hotel->filled_places + 1;
-        $hotel->filled_places = $new_places;
-        $hotel->save();
+        $new_places = $hotel->filled_places + $_GET['capacity'];
+        if($new_places < $hotel->all_places)
+        {
+            $hotel->filled_places = $new_places;
+            $hotel->save();
+        }
+        else
+        {
+            return back()->with('success', 'Not enough spaces left!');
+        }
 
-        return redirect('/hotels/')->with('success', 'You successfully logged to the hotel!');
+        return redirect('/hotels/')->with('success', 'You successfully logged ' . $_GET['capacity'] . ' people to the hotel!');
     }
 
     public function hotellogout()
     {
+        $login1 = Login::where('hotel_id', $_GET['hotel_id'])->value('capacity');
+        $capacity = $login1;
         $login = Login::where('hotel_id', $_GET['hotel_id']);
         $login->delete();
 
         $hotel = Hotel::find($_GET['hotel_id']);
-        $new_places = $hotel->filled_places - 1;
+        $new_places = $hotel->filled_places - $capacity;
         $hotel->filled_places = $new_places;
         $hotel->save();
         
-        return redirect('/hotels/')->with('success', 'You successfully logged out of the hotel!');
+        return redirect('/hotels/')->with('success', 'You successfully logged ' . $capacity . ' out of the hotel!');
     }
 }

@@ -32,7 +32,12 @@ Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edi
 Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserController@update']);
 Route::delete('users/{user}', ['as' => 'users.delete', 'uses' => 'UserController@destroy']);
 
-Route::post('/search',['uses' => 'HotelsController@search','as' => 'search']);
+/*Route::get('/search', function (Request $request) {
+    return Hotels\Hotel::search($request->search)->get();
+});*/
+
+Route::resource('queries', 'QueryController');
+Route::post('queries.search', ['uses' => 'QueryController@search']);
 
 Route::get('/hotellogin',['uses' => 'HotelsController@hotellogin','as' => 'hotellogin']);
 Route::get('/hotellogout',['uses' => 'HotelsController@hotellogout','as' => 'hotellogout']);

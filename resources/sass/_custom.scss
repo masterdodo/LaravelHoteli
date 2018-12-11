@@ -154,3 +154,21 @@ body
 {
     color: rgb(26, 184, 26);
 }
+
+#capacity-field
+{
+    width: 60px;
+}
+
+.hotel-image
+{
+    width: 350px;
+}
+
+@media only screen and (max-width: 1450px)
+{
+    .hotel-image
+    {
+        width: 100%;
+    }
+}
