@@ -4,8 +4,8 @@ This project allows you to insert hotels to the database. It allows you to edit 
 ### Kazalo:
 [Login and Register](#login-and-register)<br>
 [Administrator](#administrator)<br>
-[Uporabniki](#uporabniki)<br>
-[Upravljanje hotelov](#upravljanje-hotelov)<br>
+[Users](#users)<br>
+[Managing Hotels](#managing-hotels)<br>
 ## Login and Register
 ### 1. Register
 You can register in two ways:<br>
