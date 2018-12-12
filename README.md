@@ -1,5 +1,5 @@
 # Hotel Manager
-This project allows you to insert hotels to the database. It allows you to edit them or delte them if you are the publisher of that hotel. 
+This project allows you to insert hotels to the database. It allows you to edit them or delete them if you are the publisher of that hotel. 
 <br><br>
 ### Contents:
 [Login and Register](#login-and-register)<br>
@@ -32,8 +32,8 @@ All users that create their account can apply for a hotel and can choose how man
 ### 1. Publishers
 Publisher can:<br>
 - Add new hotels
-- Edit their hotels (their own)
-- Delete their hotels (their own)
+- Edit their hotels
+- Delete their hotels
 ### 2. Normal users
 Normal users are the ones that login/signup through regular Auth Laravel system.<br>
 They don't have any special rights:<br>
