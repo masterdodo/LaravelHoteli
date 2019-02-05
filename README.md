@@ -1,4 +1,4 @@
-# Hotel Manager
+# Hotel Manager avkm
 This project allows you to insert hotels to the database. It allows you to edit them or delete them if you are the publisher of that hotel. 
 <br><br>
 ### Contents:
