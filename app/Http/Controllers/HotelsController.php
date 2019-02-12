@@ -187,7 +187,6 @@ class HotelsController extends Controller
         $log->user_id = $_GET['user_id'];
         $log->hotel_id = $_GET['hotel_id'];
         $log->capacity = $_GET['capacity'];
-        $log->save();
 
         $hotel = Hotel::find($_GET['hotel_id']);
         $new_places = $hotel->filled_places + $_GET['capacity'];
@@ -195,10 +194,11 @@ class HotelsController extends Controller
         {
             $hotel->filled_places = $new_places;
             $hotel->save();
+            $log->save();
         }
         else
         {
-            return back()->with('success', 'Not enough spaces left!');
+            return back()->with('error-field', 'Not enough spaces left!');
         }
 
         return redirect('/hotels/')->with('success', 'You successfully logged ' . $_GET['capacity'] . ' people to the hotel!');
@@ -206,9 +206,10 @@ class HotelsController extends Controller
 
     public function hotellogout()
     {
-        $login1 = Login::where('hotel_id', $_GET['hotel_id'])->value('capacity');
+        $user_id = Auth::user()->id;
+        $login1 = Login::where('hotel_id', $_GET['hotel_id'])->where('user_id', $user_id)->value('capacity');
         $capacity = $login1;
-        $login = Login::where('hotel_id', $_GET['hotel_id']);
+        $login = Login::where('hotel_id', $_GET['hotel_id'])->where('user_id', $user_id);
         $login->delete();
 
         $hotel = Hotel::find($_GET['hotel_id']);
