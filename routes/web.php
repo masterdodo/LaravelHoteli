@@ -41,3 +41,4 @@ Route::post('queries.search', ['uses' => 'QueryController@search']);
 
 Route::get('/hotellogin',['uses' => 'HotelsController@hotellogin','as' => 'hotellogin']);
 Route::get('/hotellogout',['uses' => 'HotelsController@hotellogout','as' => 'hotellogout']);
+Route::get('/hotelpublisherlogout', ['uses' => 'HotelsController@hotelpublisherlogout','as' => 'hotelpublisherlogout']);

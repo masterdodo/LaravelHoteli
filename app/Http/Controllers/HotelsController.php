@@ -99,7 +99,14 @@ class HotelsController extends Controller
      */
     public function show($id)
     {
-        //
+        $Logins = Login::where('hotel_id', $id)->get();
+        $Logged_user_ids = array();
+        foreach($Logins as $Log)
+        {
+            $Logged_user_ids[] = $Log->user_id;
+        }
+        $Users = User::whereIn('id', $Logged_user_ids)->get();
+        return view('hotels.show', compact('Logins', 'Users'));
     }
 
     /**
@@ -218,5 +225,10 @@ class HotelsController extends Controller
         $hotel->save();
         
         return redirect('/hotels/')->with('success', 'You successfully logged ' . $capacity . ' out of the hotel!');
+    }
+
+    public function hotelpublisherlogout()
+    {
+        
     }
 }

@@ -24,7 +24,7 @@
     <p id="banner-title">Find the best hotel for you.</p>
     {!! Form::open(array('action' => 'QueryController@search', 'id'=>'banner-search-form')) !!}
         {!! Form::text('search', null,
-                           array('required',
+                            array('required',
                                 'id'=>'search-input',
                                 'placeholder'=>'Search for a hotel...')) !!}
         {!! Form::submit('Search',
@@ -61,11 +61,11 @@
                 @php $_SESSION['logout_exists'] = 1 @endphp
                 <td>
                     <form action="{{ action('HotelsController@hotellogout') }}">
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="hotel_id" value="{{ $Hotel->id }}">
-                            <button class="link-to-button red-button" type="submit">Log Out</button>
-                        </form>
-                    </td>
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="hotel_id" value="{{ $Hotel->id }}">
+                        <button class="link-to-button red-button" type="submit">Log Out</button>
+                    </form>
+                </td>
                     @endif
                     @endforeach
                     @endif
@@ -83,6 +83,9 @@
                 @endif
                 <table>
                 @if(Auth::user()->id == $Hotel->user_id || Auth::user()->id == 3)
+                <td>
+                    <a href="{{ route('hotels.show', $Hotel->id) }}">Show users</a>
+                </td>
                 <td>
                     <form action="{{ action('HotelsController@edit', ['id' => $Hotel->id]) }}">
                         <button class="link-to-button yellow-button" type="submit">Edit Hotel</button>
