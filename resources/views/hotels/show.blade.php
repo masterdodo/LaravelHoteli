@@ -2,7 +2,9 @@
 
 @section('content')
 
-<h2>Logged user</h2>
+<a href="{{route('home')}}" class="standard-btn">Home</a><br />
+
+<br /><h2>Logged user</h2>
 <table border="1" class="table">
     <thead>
         <td>Name</td>
@@ -20,9 +22,9 @@
                 <td>{{$Log->capacity}}</td>
                 <td>{{ $Log->created_at->diffForHumans() }}</td>
                 <td>
-                    <form action="{{ action('HotelsController@hotellogout') }}">
+                    <form action="{{ action('HotelsController@hotelpublisherlogout') }}">
                         <input type="hidden" name="user_id" value="{{ $Loged_user->id }}">
-                        <input type="hidden" name="hotel_id" value="{{ $Hotel->id }}">
+                        <input type="hidden" name="hotel_id" value="{{ $Log->hotel_id }}">
                         <button class="link-to-button red-button" type="submit">Log Out</button>
                     </form>
                 </td>

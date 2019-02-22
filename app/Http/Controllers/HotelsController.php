@@ -229,6 +229,16 @@ class HotelsController extends Controller
 
     public function hotelpublisherlogout()
     {
-        
+        $login1 = Login::where('hotel_id', $_GET['hotel_id'])->where('user_id', $_GET['user_id'])->value('capacity');
+        $capacity = $login1;
+        $login = Login::where('hotel_id', $_GET['hotel_id'])->where('user_id', $_GET['user_id']);
+        $login->delete();
+
+        $hotel = Hotel::find($_GET['hotel_id']);
+        $new_places = $hotel->filled_places - $capacity;
+        $hotel->filled_places = $new_places;
+        $hotel->save();
+
+        return redirect()->back()->with('success', 'You successfully logged out the user.');
     }
 }
