@@ -91,5 +91,6 @@
                 </div>
             </div>
         </div>
+        <img src="/images/hotel.jpg">
     </body>
 </html>
