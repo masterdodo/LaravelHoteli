@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/hotels', 'HotelsController@index')->name('hotels');
+Route::get('pejt', 'HotelsController@pejt');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('hotels', 'HotelsController');
