@@ -10,6 +10,11 @@
         {{ session()->get('error-field') }}
     </div>
 @endif
+@if (session()->has('register-fail'))
+<div class="alert alert-danger">
+    {{ session()->get('register-fail') }}
+</div>
+@endif
 @if(Auth::user())
 @if(Auth::user()->id == 3 || Auth::user()->editor == 1)
 <a href="{{ action('HotelsController@create') }}" class="standard-btn">New Hotel</a>

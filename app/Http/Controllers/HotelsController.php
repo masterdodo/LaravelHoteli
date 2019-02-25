@@ -197,7 +197,7 @@ class HotelsController extends Controller
 
         $hotel = Hotel::find($_GET['hotel_id']);
         $new_places = $hotel->filled_places + $_GET['capacity'];
-        if($new_places < $hotel->all_places)
+        if($new_places <= $hotel->all_places)
         {
             $hotel->filled_places = $new_places;
             $hotel->save();
