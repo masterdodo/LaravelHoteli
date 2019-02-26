@@ -18,7 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/hotels', 'HotelsController@index')->name('hotels');
-Route::get('pejt', 'HotelsController@pejt');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('hotels', 'HotelsController');
@@ -42,3 +41,4 @@ Route::post('queries.search', ['uses' => 'QueryController@search']);
 
 Route::get('/hotellogin',['uses' => 'HotelsController@hotellogin','as' => 'hotellogin']);
 Route::get('/hotellogout',['uses' => 'HotelsController@hotellogout','as' => 'hotellogout']);
+
