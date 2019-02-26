@@ -22,6 +22,7 @@
 @if(Auth::user()->id == 3)
 <a href="{{ action('UserController@index') }}" class="standard-btn">Users</a><br /><br />
 @elseif(Auth::user()->editor == 1)
+<a href="{{ action('HotelsController@editorallhotels') }}" class="standard-btn">My Hotels</a>
 <br /><br />
 @endif
 @endif

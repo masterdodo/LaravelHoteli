@@ -241,4 +241,19 @@ class HotelsController extends Controller
 
         return redirect()->back()->with('success', 'You successfully logged out the user.');
     }
+
+    public function editorallhotels()
+    {
+        if(Auth::guest())
+        {
+            return redirect()->action('HotelsController@index');
+        }
+        else
+        {
+            $user_id = Auth::user()->id;
+            $Hotels = Hotel::where('user_id', $user_id)->get();
+
+            return view('users.editorhotels', compact('Hotels'));
+        }
+    }
 }
