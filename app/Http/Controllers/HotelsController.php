@@ -146,7 +146,7 @@ class HotelsController extends Controller
             'end_date' => 'required|max:200',
             'description' => 'required|max:200'
         ]);
-        
+
         $hotel = Hotel::find($id);
         if(isset($request->image))
         {
@@ -223,7 +223,7 @@ class HotelsController extends Controller
         $new_places = $hotel->filled_places - $capacity;
         $hotel->filled_places = $new_places;
         $hotel->save();
-        
+
         return redirect('/hotels/')->with('success', 'You successfully logged ' . $capacity . ' out of the hotel!');
     }
 

@@ -3,6 +3,8 @@
 namespace Hotels\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Hotels\Hotel;
 use Hotels\User;
 use Auth;
@@ -108,4 +110,5 @@ class UserController extends Controller
 
         return redirect('/users/')->with('success', 'User was successfully deleted!');
     }
+
 }

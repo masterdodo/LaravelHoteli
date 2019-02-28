@@ -32,7 +32,7 @@
         {!! Form::text('search', null,
                             array('required',
                                 'id'=>'search-input',
-                                'placeholder'=>'Search for a hotel...')) !!}
+                                'placeholder'=>' Search for a hotel...')) !!}
         {!! Form::submit('Search',
                                 array('id'=>'search-submit')) !!}
     {!! Form::close() !!}

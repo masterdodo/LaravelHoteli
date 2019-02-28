@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Hotels') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -12,7 +12,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-image: url("/../inc/hotel.jpg");
+
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -51,7 +52,7 @@
             #title-name
             {
                 text-decoration: none;
-                color: #636b6f;
+                color: #555555;
             }
 
             .links > a {
@@ -65,7 +66,12 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 60px;
+                background-color:azure;
+                border-radius: 25px;
+                padding-left: 25px;
+                padding-right: 25px;
+                background-color: rgba(255,255,255,0.75);
             }
         </style>
     </head>
@@ -87,9 +93,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <a id="title-name" href="{{ route('home') }}">Hotels</a>
+                    <a id="title-name" href="{{ route('home') }}">Browse Hotels</a>
+
                 </div>
             </div>
         </div>
+
     </body>
 </html>
