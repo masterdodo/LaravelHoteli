@@ -3,6 +3,7 @@
 @section('content')
     <h2>All of your hotels</h2>
     <br />
+    <div style="overflow:auto;">
     <table class="table">
         <thead class="black white-text">
             <td>#</td>
@@ -31,4 +32,5 @@
         @endforeach
         </tbody>
     </table>
+    </div>
 @endsection

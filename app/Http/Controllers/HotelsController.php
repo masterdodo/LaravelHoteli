@@ -7,6 +7,7 @@ use Hotels\Hotel;
 use Hotels\Login;
 use Hotels\User;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class HotelsController extends Controller
@@ -30,6 +31,30 @@ class HotelsController extends Controller
         $today_date = date('Y-m-d H:i:s');
         $AllHotels = Hotel::where('start_date', '>', $today_date)->get();
         $AllUsers = User::all();
+
+        if(isset($_GET['query']))
+        {
+            $AllHotels = Hotel::where('start_date', '>', $today_date)
+            ->where(function($querystring)
+            {
+                $query = $_GET['query'];
+            $Providers = User::where('name', 'LIKE', '%' . $query . '%')->get();
+            $user_ids = array();
+            foreach($Providers as $Provider)
+            {
+                $user_ids[] = $Provider->id;
+            }
+            if(empty($user_ids))
+            {
+                $user_ids[] = 0;
+            }
+                    $querystring->orwhere('name', 'LIKE', '%' . $query . '%')
+                            ->orWhere('address', 'LIKE', '%' . $query . '%')
+                            ->orWhere('description', 'LIKE', '%' . $query . '%')
+                            ->orWhere('user_id', $user_ids);
+            })
+            ->get();
+        }
 
         return view('hotels.index', compact('AllHotels', 'Logins', 'AllUsers'));
     }
@@ -190,22 +215,29 @@ class HotelsController extends Controller
 
     public function hotellogin()
     {
-        $log = new Login;
-        $log->user_id = $_GET['user_id'];
-        $log->hotel_id = $_GET['hotel_id'];
-        $log->capacity = $_GET['capacity'];
-
-        $hotel = Hotel::find($_GET['hotel_id']);
-        $new_places = $hotel->filled_places + $_GET['capacity'];
-        if($new_places <= $hotel->all_places)
+        if($_GET['capacity']=="" || $_GET['capacity']==0)
         {
-            $hotel->filled_places = $new_places;
-            $hotel->save();
-            $log->save();
+            return redirect('/hotels/');
         }
         else
         {
-            return back()->with('error-field', 'Not enough spaces left!');
+            $log = new Login;
+            $log->user_id = $_GET['user_id'];
+            $log->hotel_id = $_GET['hotel_id'];
+            $log->capacity = $_GET['capacity'];
+
+            $hotel = Hotel::find($_GET['hotel_id']);
+            $new_places = $hotel->filled_places + $_GET['capacity'];
+            if($new_places <= $hotel->all_places)
+            {
+                $hotel->filled_places = $new_places;
+                $hotel->save();
+                $log->save();
+            }
+            else
+            {
+                return back()->with('error-field', 'Not enough spaces left!');
+            }
         }
 
         return redirect('/hotels/')->with('success', 'You successfully logged ' . $_GET['capacity'] . ' people to the hotel!');

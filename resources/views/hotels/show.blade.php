@@ -5,6 +5,7 @@
 <a href="{{route('home')}}" class="standard-btn">Home</a><br />
 
 <br /><h2>Logged user</h2>
+<div style="overflow:auto;">
 <table border="1" class="table">
     <thead>
         <td>Name</td>
@@ -33,4 +34,5 @@
     </tr>
 @endforeach
 </table>
+</div>
 @endsection

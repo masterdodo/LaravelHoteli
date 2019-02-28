@@ -81,7 +81,7 @@
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="hotel_id" value="{{ $Hotel->id }}">
                         <label for="capacity">Number of people to login:</label>
-                        <input type="number" min="1" max="{{ $Hotel->all_places }}" name="capacity" id="capacity-field"><button class="link-to-button green-button" type="submit">Log In</button>
+                        <input type="number" min="1" max="{{ $Hotel->all_places }}" name="capacity" id="capacity-field" required><button class="link-to-button green-button" type="submit">Log In</button>
                     </form>
                 </td>
                 @endif

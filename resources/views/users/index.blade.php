@@ -8,7 +8,7 @@
 @endif
 
 <a href="{{ action('UserController@create') }}" class="standard-btn">Add User</a><br /><br />
-
+<div style="overflow: auto;">
 <table border="1" class="table">
 <thead>
     <th>User name</th>
@@ -41,5 +41,6 @@
 @endif
 @endforeach
 </table>
+</div>
 
 @endsection

@@ -44,6 +44,7 @@ class QueryController extends Controller
         $AllUsers = User::all();
 
         // returns a view and passes the view the list of articles and the original query.
-        return view('hotels.index', compact('AllHotels', 'Logins', 'AllUsers', 'query'));
+        //return view('hotels.index', compact('AllHotels', 'Logins', 'AllUsers', 'query'));
+        return redirect()->route('hotels.index', compact('AllHotels', 'Logins', 'AllUsers', 'query'));
     }
 }
