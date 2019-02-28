@@ -10,7 +10,8 @@ This project allows you to insert hotels to the database. It allows you to edit 
 ### 1. Register
 You can register in two ways:<br>
 - through built-in Auth system in Laravel
-- through Google API (with your Google account)
+- through Google API (with your Google account) <br>
+Signup is protected with Google's ReCAPTCHAv2(checkbox edition).
 ### 2. Login
 You can login in two different ways:<br>
 - through Laravel Auth system that is built-in
@@ -46,6 +47,7 @@ With managing hotels there are three functions:
 - Deleting
 <br>
 It shows us a form with all the attributes, we write them/edit them and then it saves them to the database. <br>
+Editors can also check all of their hotels at any time. They can be current or past bookings. <br>
 
 ### App Screenshot:
 

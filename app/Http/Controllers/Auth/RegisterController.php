@@ -7,6 +7,7 @@ use Hotels\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use GuzzleHttp\Client;
 
 class RegisterController extends Controller
 {
@@ -52,6 +53,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'g-recaptcha-response' => ['required', 'string'],
+        ],
+        [
+            'g-recaptcha-response.required' => 'ReCAPTCHA Error. Try again!',
         ]);
     }
 
@@ -61,13 +66,42 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Hotels\User
      */
+
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'editor' => 0,
-        ]);
+        $recaptcha_response = $data['g-recaptcha-response'];
+
+        if($this->saveApiData($recaptcha_response))
+        {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'editor' => 0,
+            ]);
+        }
     }
+
+    protected function saveApiData($response)
+    {
+        $client = new Client();
+        $res = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
+            'form_params' => [
+                'response' => $response,
+                'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+            ]
+        ]);
+        $success = json_decode($res->getBody()->getContents());
+        $success = $success->success;
+
+        if($success)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }

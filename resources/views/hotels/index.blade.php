@@ -5,6 +5,16 @@
         {{ session()->get('success') }}
     </div>
 @endif
+@if(session()->has('error-field'))
+    <div class="alert alert-danger">
+        {{ session()->get('error-field') }}
+    </div>
+@endif
+@if (session()->has('register-fail'))
+<div class="alert alert-danger">
+    {{ session()->get('register-fail') }}
+</div>
+@endif
 @if(Auth::user())
 @if(Auth::user()->id == 3 || Auth::user()->editor == 1)
 <a href="{{ action('HotelsController@create') }}" class="standard-btn">New Hotel</a>
@@ -12,6 +22,7 @@
 @if(Auth::user()->id == 3)
 <a href="{{ action('UserController@index') }}" class="standard-btn">Users</a><br /><br />
 @elseif(Auth::user()->editor == 1)
+<a href="{{ action('HotelsController@editorallhotels') }}" class="standard-btn">My Hotels</a>
 <br /><br />
 @endif
 @endif
@@ -19,7 +30,7 @@
     <p id="banner-title">Find the best hotel for you.</p>
     {!! Form::open(array('action' => 'QueryController@search', 'id'=>'banner-search-form')) !!}
         {!! Form::text('search', null,
-                           array('required',
+                            array('required',
                                 'id'=>'search-input',
                                 'placeholder'=>' Search for a hotel...')) !!}
         {!! Form::submit('Search',
@@ -56,11 +67,11 @@
                 @php $_SESSION['logout_exists'] = 1 @endphp
                 <td>
                     <form action="{{ action('HotelsController@hotellogout') }}">
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="hotel_id" value="{{ $Hotel->id }}">
-                            <button class="link-to-button red-button" type="submit">Log Out</button>
-                        </form>
-                    </td>
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="hotel_id" value="{{ $Hotel->id }}">
+                        <button class="link-to-button red-button" type="submit">Log Out</button>
+                    </form>
+                </td>
                     @endif
                     @endforeach
                     @endif
@@ -78,6 +89,9 @@
                 @endif
                 <table>
                 @if(Auth::user()->id == $Hotel->user_id || Auth::user()->id == 3)
+                <td>
+                    <a href="{{ route('hotels.show', $Hotel->id) }}">Show users</a>
+                </td>
                 <td>
                     <form action="{{ action('HotelsController@edit', ['id' => $Hotel->id]) }}">
                         <button class="link-to-button yellow-button" type="submit">Edit Hotel</button>
