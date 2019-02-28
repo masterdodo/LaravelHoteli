@@ -17,9 +17,9 @@
   margin: 0 auto;
   /*width: 50vw;
     text-align: center;*/
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   margin-top: 15px;
   padding: 5px;
   border: 1px solid #a5a5a5;
@@ -104,8 +104,8 @@
 }
 
 .hotel-index-div-right {
+  padding-left: 5px;
   text-align: left;
-  padding-left: 20%;
 }
 
 .link-to-button {
@@ -130,6 +130,7 @@
 
 .green-button {
   background-color: #14ad14;
+  margin-left: 5px;
 }
 
 .blue-button {
@@ -199,10 +200,15 @@
   .hotel-index-div-right {
     text-align: left;
     padding-left: 3px;
+    padding: 10px;
   }
 
   .form-control {
     width: 100vw;
+  }
+
+  .create-hotel-div {
+    width: 100%;
   }
 }
 
