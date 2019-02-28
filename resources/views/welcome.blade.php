@@ -73,6 +73,10 @@
                 padding-right: 25px;
                 background-color: rgba(255,255,255,0.75);
             }
+
+            .login-register-buttons{
+                color: #EEEEEE;
+            }
         </style>
     </head>
     <body>
