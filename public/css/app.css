@@ -135,6 +135,10 @@
   background-color: #14ad14;
 }
 
+.blue-button {
+  background-color: rgb(71, 143, 224);
+}
+
 .link-to-button:hover {
   border-radius: 10px;
   text-decoration: underline;
@@ -762,17 +766,29 @@ pre code {
   .container {
     max-width: 720px;
   }
+  .hotel-index-div{
+    width: 98%;
+    margin: 4px;
+  }
 }
 
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
   }
+  .hotel-index-div{
+    width: 98%;
+    margin: 4px;
+  }
 }
 
-@media (min-width: 1200px) {
+@media (max-width: 1200px) {
   .container {
     max-width: 1140px;
+  }
+  .hotel-index-div{
+    width: 98%;
+    margin: 4px;
   }
 }
 

@@ -90,7 +90,7 @@
                 <table>
                 @if(Auth::user()->id == $Hotel->user_id || Auth::user()->id == 3)
                 <td>
-                    <a href="{{ route('hotels.show', $Hotel->id) }}">Show users</a>
+                    <a href="{{ route('hotels.show', $Hotel->id) }}" class="link-to-button blue-button">Show users</a>
                 </td>
                 <td>
                     <form action="{{ action('HotelsController@edit', ['id' => $Hotel->id]) }}">
