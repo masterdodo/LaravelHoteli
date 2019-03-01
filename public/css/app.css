@@ -48,7 +48,7 @@
   height: 70vh;
   background-image: url("/../inc/hotel2.jpg");
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-position: center;
 }
 
 #banner-title {

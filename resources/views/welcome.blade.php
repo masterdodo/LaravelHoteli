@@ -75,7 +75,8 @@
             }
 
             .login-register-buttons{
-                color: #EEEEEE;
+                color: white !important;
+                text-shadow: 2px 2px #040505;
             }
         </style>
     </head>
@@ -84,12 +85,12 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a class="login-register-buttons" href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a class="login-register-buttons" href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a class="login-register-buttons" href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
                 </div>
