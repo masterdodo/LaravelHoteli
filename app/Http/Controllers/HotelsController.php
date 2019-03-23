@@ -111,6 +111,22 @@ class HotelsController extends Controller
         $hotel->image = $photoName;
         $hotel->description = $request->get('description');
         $hotel->user_id = $request->get('user_id');
+        $hotel->free_wifi = $request->get('free_wifi') ? $request->get('free_wifi') : "0";
+        $hotel->airport_shuttle = $request->get('airport_shuttle') ? $request->get('airport_shuttle') : "0";
+        $hotel->non_smoking_rooms = $request->get('non_smoking_rooms') ? $request->get('non_smoking_rooms') : "0";
+        $hotel->lift = $request->get('lift') ? $request->get('lift') : "0";
+        $hotel->air_conditioning = $request->get('air_conditioning') ? $request->get('air_conditioning') : "0";
+        $hotel->parking = $request->get('parking') ? $request->get('parking') : "0";
+        $hotel->family_rooms = $request->get('family_rooms') ? $request->get('family_rooms') : "0";
+        $hotel->fitness_centre = $request->get('fitness_centre') ? $request->get('fitness_centre') : "0";
+        $hotel->spa_and_wellness_centre = $request->get('spa_and_wellness_centre') ? $request->get('spa_and_wellness_centre') : "0";
+        $hotel->swimming_pool = $request->get('swimming_pool') ? $request->get('swimming_pool') : "0";
+        $hotel->bar = $request->get('bar') ? $request->get('bar') : "0";
+        $hotel->outdoor_pool = $request->get('outdoor_pool') ? $request->get('outdoor_pool') : "0";
+        $hotel->room_service = $request->get('room_service') ? $request->get('room_service') : "0";
+        $hotel->heating = $request->get('heating') ? $request->get('heating') : "0";
+        $hotel->terrace = $request->get('terrace') ? $request->get('terrace') : "0";
+        $hotel->garden = $request->get('garden') ? $request->get('garden') : "0";
         $hotel->save();
 
         return redirect('/hotels')->with('success', 'Hotel has been added!');
@@ -131,7 +147,8 @@ class HotelsController extends Controller
             $Logged_user_ids[] = $Log->user_id;
         }
         $Users = User::whereIn('id', $Logged_user_ids)->get();
-        return view('hotels.show', compact('Logins', 'Users'));
+        $Hotel = Hotel::find($id);
+        return view('hotels.show', compact('Logins', 'Users', 'Hotel'));
     }
 
     /**

@@ -103,6 +103,8 @@
                         {{ Form::submit('Delete Hotel',['class' => 'link-to-button red-button', 'onclick' => 'return  confirm(\'Are you sure you want to delete this hotel?\')'])}}
                     {!! Form::close() !!}
                 </td>
+                @else
+                <a href="{{ route('hotels.show', $Hotel->id) }}" class="link-to-button blue-button">Expand hotel</a>
                 @endif
             </tr>
             </table>

@@ -156,6 +156,10 @@
   width: 350px;
 }
 
+.showhotel-image{
+  width: 600px;
+}
+
 @media only screen and (min-width: 451px) and (max-width: 1450px) {
   .hotel-index-div {
     width: 98%;
@@ -173,8 +177,33 @@
   }
 }
 
+.hotel-props svg{
+  fill: green;
+}
+
+.hotel-props{
+  color: green;
+}
+
+.showhoteluser{
+  margin: 0 auto;
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.712);
+  padding: 10px;
+}
+
+.show-body{
+  padding-top:20px;
+  padding-bottom: 100px;
+  background-image: url('/../inc/showhotelbanner.jpg');
+}
+
 @media only screen and (max-width: 450px) {
   .hotel-image {
+    width: 100%;
+  }
+
+  .showhotel-image {
     width: 100%;
   }
 
