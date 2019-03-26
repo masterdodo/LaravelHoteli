@@ -4,8 +4,7 @@
 <div class="show-body">
 <a href="{{route('home')}}" class="standard-btn" style="color: white;">Home</a><br />
 
-@if(Auth::check())
-@if(Auth::user()->editor == 1 || Auth::user()->id == 3)
+@if((Auth::check() && Auth::user()->editor == 1) || (Auth::check() && Auth::user()->id == 3))
 <br /><h2>Logged user</h2>
 <div style="overflow:auto;">
 <table border="1" class="table">
@@ -37,7 +36,6 @@
 @endforeach
 </table>
 </div>
-@endif
 @else
 <br />
 <div class="showhoteluser">
