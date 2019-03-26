@@ -111,6 +111,7 @@
             @else
             <table>
                 <tr>
+                        <a href="{{ route('hotels.show', $Hotel->id) }}" class="link-to-button blue-button">Expand hotel</a>
                         <a class="link-to-button green-button" href="{{ url('/login') }}">Log In</a>
                 </tr>
             </table>

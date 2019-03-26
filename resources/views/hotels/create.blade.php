@@ -19,8 +19,6 @@
 @endif
 
 <h1>New Hotel</h1>
-<p>Options:
-</p>
 <br />
 
     <div class="create-hotel-div">
