@@ -60,6 +60,22 @@
             {!! Form::label('image', 'Image:') !!}
             {!! Form::file('image', ['class'=>'form-control']) !!}
         </div>
+        <div class="form-group">
+            {!! Form::label('image1', 'Image 1:') !!}
+            {!! Form::file('image1', ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('image2', 'Image 2:') !!}
+            {!! Form::file('image2', ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('image3', 'Image 3:') !!}
+            {!! Form::file('image3', ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('image4', 'Image 4:') !!}
+            {!! Form::file('image4', ['class'=>'form-control']) !!}
+        </div>
 
         <div class="form-group">
             {!! Form::label('description', 'Description:') !!}
