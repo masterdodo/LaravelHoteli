@@ -195,7 +195,9 @@
 .show-body{
   padding-top:20px;
   padding-bottom: 100px;
-  background-image: url('/../inc/showhotelbanner.jpg');
+  background-image: url('/../inc/showhotelbanner.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @media only screen and (max-width: 450px) {
