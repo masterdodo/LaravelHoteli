@@ -13,7 +13,8 @@
         <style>
             html, body {
                 background-image: url("/../inc/hotel.jpg");
-
+                background-repeat: no-repeat;
+                background-size: cover;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
