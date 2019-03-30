@@ -4,7 +4,7 @@
 <div class="show-body">
 <a href="{{route('home')}}" class="standard-btn" style="color: white;">Home</a><br />
 
-@if(Auth::user()->editor == 1)
+@if((Auth::check() && Auth::user()->editor == 1) || (Auth::check() && Auth::user()->id == 3))
 <br /><h2>Logged user</h2>
 <div style="overflow:auto;">
 <table border="1" class="table">
@@ -36,11 +36,39 @@
 @endforeach
 </table>
 </div>
-@elseif(Auth::user())
+@else
 <br />
 <div class="showhoteluser">
     <h1 style="text-align: center;">{{ $Hotel->name }}</h1>
-    <img src="{{url('/images'). "/" . $Hotel->image}}" alt="hotel_image" class="showhotel-image">
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" style=" width:100%; height: 500px !important;">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="{{url('/images'). "/" . $Hotel->image}}" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{{url('/images'). "/" . $Hotel->image1}}" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{{url('/images'). "/" . $Hotel->image2}}" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{{url('/images'). "/" . $Hotel->image3}}" alt="Fourth slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{{url('/images'). "/" . $Hotel->image4}}" alt="Fifth slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
     <p><b>Price: </b><span class="price-hotel"><b>{{$Hotel->price}} €</b></span></p>
     <p><b>Filled:</b> {{$Hotel->filled_places}}/{{$Hotel->all_places}} <b>Free places:</b> {{$Hotel->all_places - $Hotel->filled_places}} </p>
     <p><b>Hotel address:</b> {{$Hotel->address}}</p>

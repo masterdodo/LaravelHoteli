@@ -93,12 +93,28 @@ class HotelsController extends Controller
             'start_date' => 'required|date_format:Y-m-d',
             'end_date' => 'required|date_format:Y-m-d',
             'image' => 'image|required',
+            'image1' => 'image|required',
+            'image2' => 'image|required',
+            'image3' => 'image|required',
+            'image4' => 'image|required',
             'description' => 'required|max:200',
             'user_id' => 'required|numeric|min:0'
         ]);
 
         $photoName = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('images'), $photoName);
+
+        $photoName1 = time().'.'.$request->image1->getClientOriginalExtension();
+        $request->image1->move(public_path('images'), $photoName1);
+
+        $photoName2 = time().'.'.$request->image2->getClientOriginalExtension();
+        $request->image2->move(public_path('images'), $photoName2);
+
+        $photoName3 = time().'.'.$request->image3->getClientOriginalExtension();
+        $request->image3->move(public_path('images'), $photoName3);
+
+        $photoName4 = time().'.'.$request->image4->getClientOriginalExtension();
+        $request->image4->move(public_path('images'), $photoName4);
 
         $hotel = new Hotel;
         $hotel->name = $request->get('name');
@@ -109,6 +125,10 @@ class HotelsController extends Controller
         $hotel->start_date = $request->get('start_date');
         $hotel->end_date = $request->get('end_date');
         $hotel->image = $photoName;
+        $hotel->image1 = $photoName1;
+        $hotel->image2 = $photoName2;
+        $hotel->image3 = $photoName3;
+        $hotel->image4 = $photoName4;
         $hotel->description = $request->get('description');
         $hotel->user_id = $request->get('user_id');
         $hotel->free_wifi = $request->get('free_wifi') ? $request->get('free_wifi') : "0";

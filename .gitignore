@@ -15,4 +15,5 @@ yarn-error.log
 .env
 .phpunit.result.cache
 /public/images
+/package.json
 /public/css/app.css

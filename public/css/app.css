@@ -37,7 +37,7 @@
 
 .standard-btn {
   padding: 10px;
-  margin-left: 5px;
+  margin-left: 14px;
   text-decoration: none;
   color: gray;
   border: 1px #ccc solid;
@@ -94,7 +94,8 @@
   cursor: pointer;
   border-radius: 10px;
   margin-left: 10px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px #040505;
 }
 
 #search-submit:hover {
@@ -195,7 +196,9 @@
 .show-body{
   padding-top:20px;
   padding-bottom: 100px;
-  background-image: url('/../inc/showhotelbanner.jpg');
+  background-image: url('/../inc/showhotelbanner.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @media only screen and (max-width: 450px) {

@@ -17,12 +17,12 @@
 @endif
 @if(Auth::user())
 @if(Auth::user()->id == 3 || Auth::user()->editor == 1)
-<a href="{{ action('HotelsController@create') }}" class="standard-btn">New Hotel</a>
+<a href="{{ action('HotelsController@create') }}" class="btn btn-primary" role="button">New Hotel</a>
 @endif
 @if(Auth::user()->id == 3)
-<a href="{{ action('UserController@index') }}" class="standard-btn">Users</a><br /><br />
+<a href="{{ action('UserController@index') }}" class="btn btn-primary">Users</a><br /><br />
 @elseif(Auth::user()->editor == 1)
-<a href="{{ action('HotelsController@editorallhotels') }}" class="standard-btn">My Hotels</a>
+<a href="{{ action('HotelsController@editorallhotels') }}" class="btn btn-primary">My Hotels</a>
 <br /><br />
 @endif
 @endif
@@ -111,6 +111,7 @@
             @else
             <table>
                 <tr>
+                        <a href="{{ route('hotels.show', $Hotel->id) }}" class="link-to-button blue-button">Expand hotel</a>
                         <a class="link-to-button green-button" href="{{ url('/login') }}">Log In</a>
                 </tr>
             </table>
