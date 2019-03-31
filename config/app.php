@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/laravelapp'),
+    'url' => env('APP_URI', 'https://hotels.aristovnik.com'),
 
     /*
     |--------------------------------------------------------------------------
