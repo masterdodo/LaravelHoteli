@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+#map
+{
+    height: 425px;
+}
+</style>
 <div class="show-body">
 <a href="{{route('home')}}" class="standard-btn" style="color: white;">Home</a><br />
 
@@ -39,9 +45,9 @@
 @else
 <br />
 <div class="showhoteluser">
-    <h1 style="text-align: center;">{{ $Hotel->name }}</h1>
+    <h1 id="hotelname" style="text-align: center;">{{ $Hotel->name }}</h1>
 
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
         <div class="carousel-inner" style=" width:100%; height: 500px !important;">
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{{url('/images'). "/" . $Hotel->image}}" alt="First slide">
@@ -70,8 +76,42 @@
     </div>
 
     <p><b>Price: </b><span class="price-hotel"><b>{{$Hotel->price}} €</b></span></p>
+    <p><b>Hotel address:</b> <span id="hoteladdress">{{$Hotel->address}}</span></p>
+    <!--<p>{{ $response = GooglePlaces::textSearch('Hotel Rogla') }}</p>-->
+    <div id="map"></div>
+    <script>
+        function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 18,
+            center: {lat: -34.397, lng: 150.644},
+            mapTypeId: 'satellite'
+        });
+        var geocoder = new google.maps.Geocoder();
+
+            geocodeAddress(geocoder, map);
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            var naslov = document.getElementById('hoteladdress');
+            var address = document.getElementById('hoteladdress').innerHTML;
+            geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+                resultsMap.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                map: resultsMap,
+                position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+            });
+        }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqxrioQ2ONkc5EN63yrDicRkf49Urujbs&callback=initMap">
+    </script>
     <p><b>Filled:</b> {{$Hotel->filled_places}}/{{$Hotel->all_places}} <b>Free places:</b> {{$Hotel->all_places - $Hotel->filled_places}} </p>
-    <p><b>Hotel address:</b> {{$Hotel->address}}</p>
+    
     <p><b>First day of accommodation:</b> {{$start_date = date('d. m. Y', strtotime($Hotel->start_date))}}</p>
     <p><b>Last day of accommodation:</b> {{$end_date = date('d. m. Y', strtotime($Hotel->end_date))}}</p>
     <p><b>Hotel description:</b><br /> {{$Hotel->description}}</p>
