@@ -11,7 +11,7 @@ This project allows you to insert hotels to the database. It allows you to edit 
 You can register in two ways:<br>
 - through built-in Auth system in Laravel
 - through Google API (with your Google account) <br>
-Signup is protected with Google's ReCAPTCHAv2(checkbox edition).
+<br>Signup is protected with Google's ReCAPTCHAv2(checkbox edition).
 ### 2. Login
 You can login in two different ways:<br>
 - through Laravel Auth system that is built-in
