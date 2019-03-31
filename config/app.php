@@ -175,6 +175,8 @@ return [
         Hotels\Providers\EventServiceProvider::class,
         Hotels\Providers\RouteServiceProvider::class,
 
+        SKAgarwal\GoogleApi\ServiceProvider::class,
+
     ],
 
     /*
@@ -226,6 +228,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'GooglePlaces' => SKAgarwal\GoogleApi\Facade::class,
     ],
 
 ];
