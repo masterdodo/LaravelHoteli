@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>All of your hotels</h2>
+    <h2 class="margin">All of your hotels</h2>
     <br />
     <div style="overflow:auto;">
     <table class="table">

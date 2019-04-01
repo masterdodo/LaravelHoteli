@@ -17,7 +17,8 @@
 @endif
 @if(Auth::user())
 @if(Auth::user()->id == 3 || Auth::user()->editor == 1)
-<a href="{{ action('HotelsController@create') }}" class="btn btn-primary" role="button">New Hotel</a>
+<span class="margin">
+<a href="{{ action('HotelsController@create') }}" class="btn btn-primary" role="button">New Hotel</a> </span>
 @endif
 @if(Auth::user()->id == 3)
 <a href="{{ action('UserController@index') }}" class="btn btn-primary">Users</a><br /><br />

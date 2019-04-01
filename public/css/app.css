@@ -3,8 +3,22 @@
   background-color: #8c744b;
 }
 
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.grid-item{
+    padding-bottom: 3px;
+}
+
+.margin{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 #hotels {
-  width: 100vw;
+  width: 98vw;
   text-align: center;
 }
 

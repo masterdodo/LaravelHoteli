@@ -18,10 +18,10 @@
     </div>
 @endif
 
-<h1>Edit hotel</h1>
+<h1 class="margin">Edit hotel</h1>
 <br />
 
-    <div class="edit-hotel-div">
+    <div class="edit-hotel-div margin">
         <form method="post" action="{{action('HotelsController@update', $id)}}" enctype="multipart/form-data">
             @csrf
             <input name="_method" type="hidden" value="PATCH">
@@ -50,8 +50,8 @@
                 <input type="date" class="form-control" name="end_date" value="{{$end_date = date('Y-m-d', strtotime($hotel->end_date))}}">
             </div>
             <div class="form-group">
-                <label for="image">Image:</label>
-                <input type="file" class="form-control" name="image">
+                {!! Form::label('image', 'Image:') !!}
+                {!! Form::file('image', ['class'=>'form-control-file']) !!}
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
