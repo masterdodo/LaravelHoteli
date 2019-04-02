@@ -1,22 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-#map
-{
-    height: 425px;
-}
-</style>
-<div class="show-body">
-<a href="{{route('home')}}" class="standard-btn" style="color: white;">Home</a><br />
+
+<div>
+<a href="{{route('home')}}" class="standard-btn" style="color: black;margin-left:20px;">Home</a><br />
 
 @if((Auth::check() && Auth::user()->editor == 1) || (Auth::check() && Auth::user()->id == 3))
-<br /><h2>Logged user</h2>
-<div style="overflow:auto;">
+<br /><h2 class="margin">Logged user</h2><br>
+<div class="margin">
 <table border="1" class="table">
     <thead>
-        <td>Name</td>
         <td>Email</td>
+        <td>Name</td>
         <td>Capacity</td>
         <td>Date of log</td>
         <td>Logout</td>
@@ -111,7 +106,7 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqxrioQ2ONkc5EN63yrDicRkf49Urujbs&callback=initMap">
     </script>
     <p><b>Filled:</b> {{$Hotel->filled_places}}/{{$Hotel->all_places}} <b>Free places:</b> {{$Hotel->all_places - $Hotel->filled_places}} </p>
-    
+
     <p><b>First day of accommodation:</b> {{$start_date = date('d. m. Y', strtotime($Hotel->start_date))}}</p>
     <p><b>Last day of accommodation:</b> {{$end_date = date('d. m. Y', strtotime($Hotel->end_date))}}</p>
     <p><b>Hotel description:</b><br /> {{$Hotel->description}}</p>

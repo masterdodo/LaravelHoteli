@@ -58,7 +58,7 @@
                 <textarea class="form-control" name="description">{{$hotel->description}}</textarea>
             </div>
             <div class="row">
-                <button type="submit" class="btn btn-success" style="margin-left:38px">Edit hotel</button>
+                <button type="submit" class="btn btn-success" style="margin-left:15px">Edit hotel</button>
             </div>
         </form>
     </div>
